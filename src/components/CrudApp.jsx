@@ -28,38 +28,53 @@ const CrudApp = () => {
 
   const [dataToEdit, setDataToEdit] = useState(null)
 
+  const getData = async () => {
+    const res = await axios.get("http://localhost:3001/items"),
+      json = await res.data;
+    setDb(json)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   const createData = (data) => {
     data.id = Date.now()
     setDb(...db, data)
   }
   const updateData = (data) => {
-    let newData = db.map(el => el.id === data.id ? data : el)
+    let newData = db.map((el) => (el.id === data.id ? data : el))
     setDb(newData)
   }
   const deleteData = (id) => {
-    let isDelete = window.confirm(`Are you sure you want to delete the ID ${id}?`)
+    let isDelete = window.confirm(
+      `Are you sure you want to delete the ID ${id}?`
+    )
 
-    if(isDelete){
-        let newData = db.filter(el => el.id !== id)
-        setDb(newData)
-    }else return
+    if (isDelete) {
+      let newData = db.filter((el) => el.id !== id)
+      setDb(newData)
+    } else return
   }
 
   return (
     <div>
       <h2>CRUD App</h2>
-      <CrudFrom 
+      <CrudFrom
         createData={createData}
         updateData={updateData}
         dataToEdit={dataToEdit}
         setDataToEdit={setDataToEdit}
       />
-      <CrudTable data={db} 
-        setDataToEdit={setDataToEdit}
-        deleteData={deleteData}
-      />
+      {db && (
+        <CrudTable
+          data={db}
+          setDataToEdit={setDataToEdit}
+          deleteData={deleteData}
+        />
+      )}
     </div>
   )
 }
 
-export default CrudApp;
+export default CrudApp
