@@ -6,18 +6,49 @@ const initialForm = {
     id: null
 }
 
-const CrudForm = () => {
+const CrudForm = ({createData, updateData, dataToEdit, setDataToEdit}) => {
 
-    const [form, setform] = useState(initialForm)
+    const [form, setForm] = useState(initialForm)
 
-    const handleChange = () => {}
-    const handleSubmit = () => {}
-    const handleReset = () => {}
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.beverage]: e.target.value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(!form.beverage || form.food) {
+            alert("Incomplete data")
+            return
+        }
+        if(form.id === null){
+            createData(form)
+        }else{
+            updateData(form)
+        }
+        handleReset()
+    }
+    
+    const handleReset = (e) => {
+        setForm(initialForm)
+        setDataToEdit(null)
+    }
+
+    useEffect(() => {
+      if(dataToEdit){
+        setForm(dataToEdit)
+      }else{
+        setForm(initialForm)
+      }
+    }, [dataToEdit])
+    
 
     return (
         <div>
-        <h3>Add</h3>
-        <form>
+        <h3>{dataToEdit ? 'Edit' : 'Add'}</h3>
+        <form onSubmit={handleSubmit}>
             <input type="text" name="beverage" placeholder="Beverage" onChange={handleChange} value={form.beverage}/>
             <input type="text" name="food" placeholder="Food" onChange={handleChange} value={form.food}/>
             <input type="submit" value="Enviar" />
