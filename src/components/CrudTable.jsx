@@ -22,7 +22,7 @@ const CrudTable = () => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
 export default CrudTable

@@ -1,6 +1,6 @@
 function App() {
   return (
-    <p>asdas</p>
+    <p>React CRUD Café</p>
   )
 }
 
