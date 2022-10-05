@@ -1,6 +1,8 @@
+import CrudApp from "./components/CrudApp";
+
 function App() {
   return (
-    <p>React CRUD Café</p>
+    <CrudApp />
   )
 }
 

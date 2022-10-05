@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 const initialForm = {
     beverage: "",
-    food "",
+    food: "",
     id: null
 }
 
@@ -51,8 +51,8 @@ const CrudForm = ({createData, updateData, dataToEdit, setDataToEdit}) => {
         <form onSubmit={handleSubmit}>
             <input type="text" name="beverage" placeholder="Beverage" onChange={handleChange} value={form.beverage}/>
             <input type="text" name="food" placeholder="Food" onChange={handleChange} value={form.food}/>
-            <input type="submit" value="Enviar" />
-            <input type="reset" value="Limpiar" onClick={handleReset}/>
+            <input type="submit" value="Send" />
+            <input type="reset" value="Clean" onClick={handleReset}/>
         </form>
         </div>
     )

@@ -8,7 +8,7 @@ const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
             <td>{food}</td>
             <td>
                 <button onClick={() => setDataToEdit(el)}>Edit</button>
-                <button onClick={() => setDataToEdit(id)}>Delete</button>
+                <button onClick={() => deleteData(id)}>Delete</button>
             </td>
         </tr>
     )

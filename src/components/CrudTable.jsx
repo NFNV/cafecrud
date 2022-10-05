@@ -1,7 +1,9 @@
+import CrudTableRow from "./CrudTableRow"
+
 const CrudTable = ({data, setDataToEdit, deleteData}) => {
   return (
     <div>
-      <h3>Tabla de Datos</h3>
+      <h3>Coffee & food</h3>
       <table>
         <thead>
           <tr>
@@ -25,14 +27,6 @@ const CrudTable = ({data, setDataToEdit, deleteData}) => {
                 deleteData={deleteData}
               />
             ))}
-          {/* <tr>
-            <td>Cappuccino</td>
-            <td>Apple roll</td>
-            <td>
-              <button>Edit</button>
-              <button>Delete</button>
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </div>
