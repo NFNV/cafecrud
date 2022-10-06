@@ -55,9 +55,9 @@ const CrudApp = () => {
         headers: { "content-type": "application/json" },
         data: JSON.stringify(data)
     }
-    let res = await axios("http://localhost:3001/items", options),
+    const res = await axios("http://localhost:3001/items", options),
     el = await res.data
-    setDb(...db, el)
+    setDb([...db, el])
   }
 
   const updateData = (data) => {

@@ -13,13 +13,13 @@ const CrudForm = ({createData, updateData, dataToEdit, setDataToEdit}) => {
     const handleChange = (e) => {
         setForm({
             ...form,
-            [e.target.beverage]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(!form.beverage || form.food) {
+        if(!form.beverage || !form.food) {
             alert("Incomplete data")
             return
         }
