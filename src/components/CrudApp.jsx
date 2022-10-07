@@ -1,31 +1,11 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
 import CrudForm from "./CrudForm"
 import CrudTable from "./CrudTable"
 import Loader from "./Loader"
 
 
 const initialDb = [
-  {
-    id: 1,
-    beverage: "cappuccino",
-    food: "apple roll",
-  },
-  {
-    id: 2,
-    beverage: "espresso",
-    food: "mini cookie",
-  },
-  {
-    id: 3,
-    beverage: "cortado doble",
-    food: "medialuna",
-  },
-  {
-    id: 4,
-    beverage: "americano",
-    food: "vainilla cookie",
-  },
+
 ]
 
 const CrudApp = () => {
@@ -36,8 +16,8 @@ const CrudApp = () => {
   const [loading, setLoading] = useState(false)
 
   const getData = async () => {
-    const res = await axios.get("http://localhost:3001/items"),
-      json = await res.data;
+    const res = await fetch("http://localhost:3001/items"),
+     json = await res.json();
     setDb(json)
   }
 
@@ -48,38 +28,55 @@ const CrudApp = () => {
   }, [])
 
   const createData = async (data) => {
-    data.id = Date.now()
+      data.id = Date.now()
+      
+      const options = {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          data: JSON.stringify(data)
+        }
+        const res = await fetch("http://localhost:3001/items", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data)
+          })
+        console.log(options)
+        console.log(data)
+        console.log(res)
+    getData()    
+  }
 
-    let options = {
-        method: "POST",
+  const updateData = async (data) => {
+    let endpoint = `http://localhost:3001/items/${data.id}`
+
+    const options = {
+        method: "PUT",
         headers: { "content-type": "application/json" },
-        data: JSON.stringify(data)
+        body: JSON.stringify(data)
     }
-    const res = await axios("http://localhost:3001/items", options),
-    el = await res.data
-    setDb([...db, el])
+
+   await fetch(endpoint, options)
+
+    getData()
   }
 
-  const updateData = (data) => {
-    let newData = db.map((el) => (el.id === data.id ? data : el))
-    setDb(newData)
-  }
   const deleteData = async (id) => {
     let isDelete = window.confirm(
       `Are you sure you want to delete the ID ${id}?`
     )
 
     if (isDelete) {
-      let newData = db.filter((el) => el.id !== id)
         let endpoint = `http://localhost:3001/items/${id}`
 
         let options = {
             method: "DELETE",
             headers: { "content-type": "application/json" }
-        },
-        res = await axios(endpoint, options),
-        el = await res.data
-      setDb(newData)
+        }
+        await fetch(endpoint, options)
+
+     
+      getData()
+
     } else return
   }
 

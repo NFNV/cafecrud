@@ -1,6 +1,6 @@
 const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
 
-    let {beverage, food, id} = el
+    const {beverage, food, id} = el
 
     return (
         <tr>
