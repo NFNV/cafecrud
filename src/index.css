@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  background-color: #282c34;
+  background-color: #bf825e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #61dafb;
+  color: #3a3126;
   text-align: center
 }
