@@ -31,19 +31,12 @@ const CrudApp = () => {
       data.id = Date.now()
       
       const options = {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          data: JSON.stringify(data)
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data)
         }
-        const res = await fetch("http://localhost:3001/items", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(data)
-          })
-        console.log(options)
-        console.log(data)
-        console.log(res)
-    getData()    
+        await fetch("http://localhost:3001/items", options)
+        getData()    
   }
 
   const updateData = async (data) => {
